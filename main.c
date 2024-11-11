@@ -138,7 +138,7 @@ int main(void)
 			gyro_raw[1] = (int16_t)(gyro[2] << 8 | gyro[3]) - gyro_offset[1];
 			gyro_raw[2] = (int16_t)(gyro[4] << 8 | gyro[5]) - gyro_offset[2];
 			
-			if ((gyro_raw[0] > -500) && (gyro_raw[0] < 500))
+			/*if ((gyro_raw[0] > -500) && (gyro_raw[0] < 500))
 			{
 				gyro_raw[0] = 0;
 			}
@@ -151,7 +151,7 @@ int main(void)
 			if ((gyro_raw[2] > -500) && (gyro_raw[2] < 500))
 			{
 				gyro_raw[2] = 0;
-			}
+			}*/
 			
 			//determination quaternion q_current
 			w_raw = sqrt(gyro_raw[0]*gyro_raw[0] + gyro_raw[1]*gyro_raw[1] + gyro_raw[2]*gyro_raw[2]);
@@ -193,8 +193,8 @@ int main(void)
 			
 			//determination linear acceleration
 			g_unit[0] = accel_g[0]/g_l;   g_unit[1] = accel_g[1]/g_l;   g_unit[2] = accel_g[2]/g_l;
-			a_linear[0] = (uint16_t)(accel_raw[0]*g_unit[2] - accel_raw[2]*g_unit[0]);
-			a_linear[1] = (uint16_t)((accel_raw[0]*g_unit[0] + accel_raw[1]*g_unit[1] + accel_raw[2]*g_unit[2]) - g_base);
+			a_linear[0] = (int16_t)(accel_raw[0]*g_unit[2] - accel_raw[2]*g_unit[0]);
+			a_linear[1] = (int16_t)((accel_raw[0]*g_unit[0] + accel_raw[1]*g_unit[1] + accel_raw[2]*g_unit[2]) - g_base);
 			
 			//determination linear velocity
 			v_linear[0] += a_linear[0]*dt;
